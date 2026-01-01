@@ -6,3 +6,6 @@ config SHIELD_COMFYKEY_LEFT
 
 config SHIELD_COMFYKEY_RIGHT
     def_bool $(shields_list_contains,comfykey_right)
+
+config SHIELD_COMFYKEY_DONGLE
+    def_bool $(shields_list_contains,comfykey_dongle)
