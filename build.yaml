@@ -23,7 +23,3 @@ include:
     shield: lily58_left
   - board: nice_nano_v2
     shield: lily58_right
-  - board: adafruit_kb2040
-    shield: leeloo_rev2_left
-  - board: adafruit_kb2040
-    shield: leeloo_rev2_right
