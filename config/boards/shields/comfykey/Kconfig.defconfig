@@ -1,0 +1,16 @@
+if SHIELD_COMFYKEY_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "Comfykey"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+if SHIELD_COMFYKEY_LEFT || SHIELD_COMFYKEY_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif
