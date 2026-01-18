@@ -4,6 +4,9 @@ if SHIELD_COMFYKEY_LEFT || SHIELD_COMFYKEY_RIGHT || SHIELD_COMFYKEY_DONGLE
 config ZMK_SPLIT
     default y
 
+config ZMK_BLE
+	default y
+
 endif
 
 if SHIELD_COMFYKEY_DONGLE
@@ -27,5 +30,8 @@ config BT_MAX_CONN
 # Set this to the same number as BT_MAX_CONN
 config BT_MAX_PAIRED
     default 6
+
+config ZMK_USB
+	default y
 
 endif
