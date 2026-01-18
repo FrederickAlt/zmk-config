@@ -2,12 +2,12 @@ file_format: "1"
 id: comfykey
 name: Comfykey
 type: shield
-url: https://github.com/MakotoKurauchi/comfykey
+url: https://github.com/FrederickAlt/comfykey
 requires: [pro_micro]
-exposes: [i2c_oled]
 features:
   - keys
   - display
 siblings:
   - comfykey_left
   - comfykey_right
+  - comfykey_dongle
