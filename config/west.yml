@@ -1,6 +1,6 @@
 manifest:
   defaults:
-    revision: v0.3
+    revision: main
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
@@ -14,6 +14,5 @@ manifest:
       import: app/west.yml
     - name: zmk-config
       remote: englmaxi
-      revision: v0.3
   self:
     path: config
