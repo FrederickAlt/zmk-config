@@ -13,7 +13,7 @@ manifest:
       remote: zmkfirmware
       import: app/west.yml
     - name: zmk-config
-      remote: mctechnology17
+      remote: englmaxi
       revision: main
 
   self:
