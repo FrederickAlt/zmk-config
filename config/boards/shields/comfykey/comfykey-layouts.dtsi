@@ -1,10 +1,10 @@
 #include <physical_layouts.dtsi>
 
-    \{
+    / {
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Comfykey";
-                
+
         keys  //                     w   h    x    y     rot    rx    ry
             = <&key_physical_attrs 100 100   50  400       0     0     0>
             , <&key_physical_attrs 100 100   50  800       0     0     0>
@@ -76,4 +76,4 @@
             , <&key_physical_attrs 100 100 1700  300       0     0     0>
             ;
     };  
-    \}
+};
