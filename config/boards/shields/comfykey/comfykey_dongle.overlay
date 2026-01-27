@@ -1,4 +1,4 @@
-#include comfykey.dtsi
+#include "comfykey.dtsi"
 
 / {
     chosen {
