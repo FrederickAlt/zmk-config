@@ -1,7 +1,6 @@
 manifest:
   defaults:
-    revision: v0.3
-  remotes:
+    revision: main
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
     # Additional modules containing boards/shields/custom code can be listed here as well
@@ -14,6 +13,6 @@ manifest:
       import: app/west.yml
     - name: zmk-dongle-display
       remote: englmaxi
-      revision: v0.3
+      revision: main
   self:
     path: config
