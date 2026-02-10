@@ -20,44 +20,37 @@
                      bindings = <
        
     &trans &trans
-&kp e  &kp r  &kp f  &trans  &kpj  &kp z  &kp o  &kpu
-&kp y  &kp a  &kp s  &kp d   &kp t  &kp period  &kp m  &kp n  &kp g  &kp h  &kp i  &kp p
-&trans  &kp w  &trans  &kp c  &kp l  &kp comma  &kp v  &kp b  &kp q  &kp x  &kp k  &trans
+&kp E  &kp R  &kp F  &trans  &kp J  &kp Z  &kp O  &kp U
+&kp Y  &kp A  &kp S  &kp D   &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P
+&trans  &kp W  &trans  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&kp arrowup  &kp pgup
-&kp arrowleft  &trans  &kp arrowleft  &kp home  &trans  &kp end
-&kp arrowdown  &kp phdn
+&kp UP  &kp PG_UP
+&kp LEFT  &trans  &kp RIGHT  &kp HOME  &trans  &kp END
+&kp DOWN  &kp PG_DN
 &trans &trans &trans &trans
 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                      >;
               };
               l1 {
-                     display-name = "L1";
-                     bindings = <>;
+                     status = "reserved";
               };
               l2 {
-                     display-name = "L2"; 
-                     bindings = <>;
+                     status = "reserved";
               };
               l3 {
-                     display-name = "L3";
-                     bindings = <>;
+                     status = "reserved";
               };
               l4 {
-                     display-name = "L3";
-                     bindings = <>;
+                     status = "reserved";
               };
               l5 {
-                     display-name = "L3";
-                     bindings = <>;
+                     status = "reserved";
               };
               l6 {
-                     display-name = "L3";
-                     bindings = <>;
+                     status = "reserved";
               };
               l7 {
-                     display-name = "L3";
-                     bindings = <>;
+                     status = "reserved";
               };
        };
 };
