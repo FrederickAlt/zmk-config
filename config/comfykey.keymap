@@ -12,16 +12,36 @@
  #include <dt-bindings/zmk/outputs.h>
 
 / {
+      behaviors {
+        a_morph: a_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&kp APOSTROPHE>;  // ä on German layout
+            mods = <(MOD_RALT)>;
+        };
+        o_morph: o_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp O>, <&kp SEMICOLON>;  // ö on German layout
+            mods = <(MOD_RALT)>;
+        };
+        u_morph: u_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp U>, <&kp LEFT_BRACKET>;  // ü on German layout
+            mods = <(MOD_RALT)>;
+        };
+    };
+
        keymap {
               compatible = "zmk,keymap";
 
               default {
                      display-name = "Default";
-                     bindings = <
-       
+                     bindings = <       
     &trans &trans
-&kp E  &kp R  &kp F  &trans  &kp J  &kp Z  &kp O  &kp U
-&kp Y  &kp A  &kp S  &kp D   &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P
+&kp E  &kp R  &kp F  &trans  &kp J  &kp Z  &o_morph  &u_morph
+&kp Y  &a_morph  &kp S  &kp D   &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P
 &trans  &kp W  &trans  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &kp UP  &kp PG_UP
