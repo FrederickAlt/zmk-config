@@ -6,70 +6,77 @@
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/pointing.h>
 
 / {
-      behaviors {
+    behaviors {
         a_morph: a_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp A>, <&kp APOSTROPHE>;  // ä on German layout
+            bindings = <&kp A>, <&kp APOSTROPHE>;
+
+            // ä on German layout
+
             mods = <(MOD_RALT)>;
         };
+
         o_morph: o_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp O>, <&kp SEMICOLON>;  // ö on German layout
+            bindings = <&kp O>, <&kp SEMICOLON>;
+
+            // ö on German layout
+
             mods = <(MOD_RALT)>;
         };
+
         u_morph: u_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp U>, <&kp LEFT_BRACKET>;  // ü on German layout
+            bindings = <&kp U>, <&kp LEFT_BRACKET>;
+
+            // ü on German layout
+
             mods = <(MOD_RALT)>;
         };
     };
 
-       keymap {
-              compatible = "zmk,keymap";
+    keymap {
+        compatible = "zmk,keymap";
 
-              default {
-                     display-name = "Default";
-                     bindings = <       
-    &trans &trans
-&kp E  &kp R  &kp F  &trans  &kp J  &kp Z  &o_morph  &u_morph
-&kp Y  &a_morph  &kp S  &kp D   &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P
-&trans  &kp W  &trans  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&kp UP  &kp PG_UP
-&kp LEFT  &trans  &kp RIGHT  &kp HOME  &trans  &kp END
-&kp DOWN  &kp PG_DN
-&trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-                     >;
-              };
-              l1 {
-                     status = "reserved";
-              };
-              l2 {
-                     status = "reserved";
-              };
-              l3 {
-                     status = "reserved";
-              };
-              l4 {
-                     status = "reserved";
-              };
-              l5 {
-                     status = "reserved";
-              };
-              l6 {
-                     status = "reserved";
-              };
-              l7 {
-                     status = "reserved";
-              };
-       };
+        default {
+            display-name = "Default";
+            bindings = <
+&kp LS(NUMBER_4)  &kp LS(NUMBER_0)  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp TAB  &kp GRAVE  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &kp RET  &mo 1  &kp LCTRL  &kp SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &kp EQUAL  &kp LEFT_SHIFT  &mo 2  &kp RALT  &kp BACKSPACE  &kp LS(N5)  &kp NUBS  &kp LS(NUBS)  &kp RA(NUBS)
+            >;
+        };
+
+        num_sepcial {
+            display-name = "num-special";
+            bindings = <
+&kp N0  &trans  &kp N7  &kp N8  &kp N9  &trans  &trans  &trans  &trans  &trans  &kp F9  &kp F10  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &trans  &trans  &trans  &trans  &trans  &kp F11  &kp F12  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F2  &kp F3  &kp F4  &trans  &trans  &trans  &trans  &kp F5  &kp F6  &kp F7  &kp F8
+            >;
+        };
+
+        navigation {
+            display = "navigation";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &trans  &trans  &mo 3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        r1 { status = "reserved"; };
+
+        r2 { status = "reserved"; };
+
+        r3 { status = "reserved"; };
+
+        r4 { status = "reserved"; };
+
+        r5 { status = "reserved"; };
+
+        r6 { status = "reserved"; };
+
+        r7 { status = "reserved"; };
+    };
 };
