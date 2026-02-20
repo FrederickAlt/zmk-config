@@ -49,6 +49,34 @@
             bindings = <&kp GRAVE &kp SPACE>;
             label = "HAT";
         };
+
+        areg: a_reg {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(R) &kp A>;
+            label = "A_REG";
+        };
+
+        breg: b_reg {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(R) &kp B>;
+            label = "B_REG";
+        };
+
+        creg: c_reg {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(R) &kp C>;
+            label = "C_REG";
+        };
+
+        dreg: d_reg {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(R) &kp D>;
+            label = "D_REG";
+        };
     };
 
     keymap {
@@ -64,14 +92,14 @@
         num_sepcial {
             display-name = "num-special";
             bindings = <
-&kp N0  &trans  &kp N7  &kp N8  &kp N9  &trans  &trans  &trans  &trans  &trans  &kp LS(RIGHT_BRACE)  &kp F10  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &trans  &trans  &trans  &trans  &trans  &kp RIGHT_BRACE  &kp F12  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F2  &kp F3  &kp F4  &trans  &trans  &trans  &trans  &kp F5  &kp F6  &kp F7  &kp F8
+&kp N0  &trans  &kp N7  &kp N8  &kp N9  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &trans  &trans  &trans  &trans  &trans  &kp RIGHT_BRACE  &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LS(RIGHT_BRACE)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &areg  &breg  &creg  &dreg
             >;
         };
 
         navigation {
             display-name = "navigation";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &trans  &trans  &mo 3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &trans  &trans  &mo 3  &trans  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(O)  &trans  &trans  &trans  &trans
             >;
         };
 
