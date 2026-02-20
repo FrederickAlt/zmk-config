@@ -11,7 +11,7 @@
 
             // ä on German layout
 
-            mods = <(MOD_RALT)>;
+            mods = <(MOD_RALT|MOD_LALT)>;
         };
 
         o_morph: o_morph {
@@ -21,7 +21,7 @@
 
             // ö on German layout
 
-            mods = <(MOD_RALT)>;
+            mods = <(MOD_RALT|MOD_LALT)>;
         };
 
         u_morph: u_morph {
@@ -31,7 +31,7 @@
 
             // ü on German layout
 
-            mods = <(MOD_RALT)>;
+            mods = <(MOD_RALT|MOD_LALT)>;
         };
     };
 
@@ -85,7 +85,7 @@
         default {
             display-name = "Default";
             bindings = <
-&kp LS(NUMBER_4)  &kp LS(NUMBER_0)  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp TAB  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &kp RET  &mo 1  &kp LCTRL  &kp SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &apostroph  &kp LEFT_SHIFT  &mo 2  &kp RALT  &kp BACKSPACE  &kp LS(N5)  &kp NUBS  &kp LS(NUBS)  &kp RA(NUBS)
+&kp LS(NUMBER_4)  &kp LS(NUMBER_0)  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp TAB  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &kp RET  &mo 1  &kp LCTRL  &kp SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &apostroph  &kp LEFT_SHIFT  &mo 2  &kp LEFT_ALT  &kp BACKSPACE  &kp LS(N5)  &kp NUBS  &kp LS(NUBS)  &kp RA(NUBS)
             >;
         };
 
