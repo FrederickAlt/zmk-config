@@ -49,34 +49,6 @@
             bindings = <&kp GRAVE &kp SPACE>;
             label = "HAT";
         };
-
-        a_reg: a_reg {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp A>;
-            label = "A_REG";
-        };
-
-        b_reg: b_reg {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp B>;
-            label = "B_REG";
-        };
-
-        c_reg: c_reg {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp C>;
-            label = "C_REG";
-        };
-
-        d_reg: c_reg {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp D>;
-            label = "C_REG";
-        };
     };
 
     keymap {
