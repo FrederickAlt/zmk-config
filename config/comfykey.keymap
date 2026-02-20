@@ -99,7 +99,7 @@
         navigation {
             display-name = "navigation";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &trans  &trans  &mo 3  &trans  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(O)  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &kp LC(U)  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &kp LC(D)  &trans  &mo 3  &trans  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(O)  &trans  &trans  &trans  &trans
             >;
         };
 
