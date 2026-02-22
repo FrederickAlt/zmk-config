@@ -42,6 +42,16 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
+
+        kh: kh {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KH";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+        };
     };
 
     macros {
@@ -122,14 +132,14 @@
         default {
             display-name = "Default";
             bindings = <
-&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &none  &mkp MB4  &lh 2 SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &apostroph  &mt LEFT_SHIFT ESCAPE  &mt LEFT_ALT LEFT_GUI  &mkp MB5  &mt LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
+&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &none  &mkp MB4  &lh 2 SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &apostroph  &mt LEFT_SHIFT ESCAPE  &mt LEFT_ALT LEFT_GUI  &mkp MB5  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
             >;
         };
 
         num_sepcial {
             display-name = "num-special";
             bindings = <
-&kp N0  &trans  &kp N7  &kp N8  &kp N9  &kp LA(RIGHT_BRACKET)  &trans  &kp NUBS  &kp LS(N8)  &kp LS(N9)  &trans  &kp LS(RIGHT_BRACKET)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &kp LS(NUBS)  &kp RA(LEFT_BRACE)  &kp RA(N0)  &kp BACKSLASH  &kp RA(NUBS)  &trans  &kp RIGHT_BRACKET  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &apostroph  &kp RA(N8)  &kp RA(N9)  &kp LS(N5)  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &trans  &areg  &breg  &creg  &dreg
+&kp N0  &kp RA(RIGHT_BRACKET)  &kp N7  &kp N8  &kp N9  &kp LA(RIGHT_BRACKET)  &trans  &kp NUBS  &kp LS(N8)  &kp LS(N9)  &trans  &kp LS(RIGHT_BRACKET)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &kp LS(NUBS)  &kp RA(LEFT_BRACE)  &kp RA(N0)  &kp BACKSLASH  &kp RA(NUBS)  &trans  &kp RIGHT_BRACKET  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &apostroph  &kp RA(N8)  &kp RA(N9)  &kp LS(N5)  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &trans  &areg  &breg  &creg  &dreg
             >;
         };
 
