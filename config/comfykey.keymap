@@ -72,28 +72,28 @@
         areg: a_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp A>;
+            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp A>;
             label = "A_REG";
         };
 
         breg: b_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp B>;
+            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp B>;
             label = "B_REG";
         };
 
         creg: c_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp C>;
+            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp C>;
             label = "C_REG";
         };
 
         dreg: d_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(R) &kp D>;
+            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp D>;
             label = "D_REG";
         };
 
