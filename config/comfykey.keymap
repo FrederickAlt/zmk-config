@@ -33,6 +33,15 @@
 
             mods = <(MOD_RALT|MOD_LALT)>;
         };
+
+        lh: lh {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LH";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
     };
 
     macros {
@@ -77,6 +86,34 @@
             bindings = <&kp LC(R) &kp D>;
             label = "D_REG";
         };
+
+        jmp_to_A: jmp_to_A {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp ESCAPE &apostroph &kp LS(A)>;
+            label = "JMP_TO_A";
+        };
+
+        jmp_to_B: jmp_to_B {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp ESCAPE &apostroph &kp LS(B)>;
+            label = "JMP_TO_B";
+        };
+
+        jmp_to_C: jmp_to_C {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp ESCAPE &apostroph &kp LS(C)>;
+            label = "JMP_TO_C";
+        };
+
+        jmp_to_D: jmp_to_D {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp ESCAPE &apostroph &kp LS(D)>;
+            label = "JMP_TO_D";
+        };
     };
 
     keymap {
@@ -85,21 +122,21 @@
         default {
             display-name = "Default";
             bindings = <
-&kp LS(NUMBER_4)  &kp LS(NUMBER_0)  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp TAB  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &kp RET  &mo 1  &kp LCTRL  &kp SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &apostroph  &kp LEFT_SHIFT  &mo 2  &kp LEFT_ALT  &kp BACKSPACE  &kp LS(N5)  &kp NUBS  &kp LS(NUBS)  &kp RA(NUBS)
+&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &kp LEFT_GUI  &kp LCTRL  &kp SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &apostroph  &mt LEFT_SHIFT ESCAPE  &mo 2  &kp LEFT_ALT  &kp BACKSPACE  &kp LS(N5)  &kp NUBS  &kp LS(NUBS)  &kp RA(NUBS)
             >;
         };
 
         num_sepcial {
             display-name = "num-special";
             bindings = <
-&kp N0  &trans  &kp N7  &kp N8  &kp N9  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &trans  &trans  &trans  &trans  &trans  &kp RIGHT_BRACE  &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LS(RIGHT_BRACE)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &areg  &breg  &creg  &dreg
+&kp N0  &trans  &kp N7  &kp N8  &kp N9  &kp LA(RIGHT_BRACKET)  &trans  &trans  &kp LS(N8)  &kp LS(N9)  &kp LS(RIGHT_BRACKET)  &trans  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &trans  &kp RA(LEFT_BRACE)  &kp RA(N0)  &trans  &trans  &kp RIGHT_BRACKET  &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &trans  &kp RA(N8)  &kp RA(N9)  &trans  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &trans  &areg  &breg  &creg  &dreg
             >;
         };
 
         navigation {
             display-name = "navigation";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &kp LC(U)  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &kp LC(D)  &trans  &mo 3  &trans  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(O)  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &kp LS(LC(J))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &kp LC(U)  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &kp LC(D)  &trans  &trans  &trans  &kp LC(I)  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &kp LC(O)  &trans  &trans  &trans  &trans
             >;
         };
 
