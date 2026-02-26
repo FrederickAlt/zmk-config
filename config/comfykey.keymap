@@ -52,6 +52,24 @@
             flavor = "balanced";
             tapping-term-ms = <200>;
         };
+
+        mkh: mkh {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MKH";
+            bindings = <&kp>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        mklh: mklh {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MKLH";
+            bindings = <&mo>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
     };
 
     macros {
@@ -132,7 +150,7 @@
         default {
             display-name = "Default";
             bindings = <
-&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &none  &mkp MB4  &lh 2 SPACE  &kp BACKSLASH  &kp LS(NON_US_BACKSLASH)  &kp LS(NUMBER_2)  &apostroph  &mt LEFT_SHIFT ESCAPE  &mt LEFT_ALT LEFT_GUI  &mkp MB5  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
+&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &mklh 3 MB4  &trans  &lh 2 SPACE  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &mt LEFT_SHIFT ESCAPE  &mkh LEFT_ALT MB5  &trans  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
             >;
         };
 
@@ -146,7 +164,13 @@
         navigation {
             display-name = "navigation";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &kp LS(LC(J))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &kp LC(U)  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &mkp RCLK  &trans  &mmv MOVE_DOWN  &kp LC(D)  &trans  &trans  &trans  &mkp LCLK  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &mkp RCLK  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &trans  &trans  &mmv MOVE_DOWN  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp BACKSPACE  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        fun {
+            bindings = <
+&trans  &trans  &trans  &trans  &kp F3  &kp F4  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &kp F2  &kp F5  &kp F8  &kp F11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F6  &kp F7  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
