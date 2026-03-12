@@ -187,28 +187,28 @@
         fast_letf: fast_letf {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N5 &kp LEFT_ARROW>;
+            bindings = <&kp N5 &kp N0 &kp LEFT_ARROW>;
             label = "FAST_LETF";
         };
 
         fast_right: fast_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N5 &kp RIGHT>;
+            bindings = <&kp N5 &kp N0 &kp RIGHT>;
             label = "FAST_RIGHT";
         };
 
         fast_up: fast_up {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N5 &kp UP_ARROW>;
+            bindings = <&kp N5 &kp N0 &kp UP_ARROW>;
             label = "FAST_UP";
         };
 
         fast_dwn: fast_dwn {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N5 &kp DOWN_ARROW>;
+            bindings = <&kp N5 &kp N0 &kp DOWN_ARROW>;
             label = "FAST_DWN";
         };
 
