@@ -247,7 +247,7 @@
             label = "REG_A_YANK";
         };
 
-        reg_b_yank: reg_a_yank {
+        reg_b_yank: reg_b_yank {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp B &kp P>;
