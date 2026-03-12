@@ -70,6 +70,33 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
+
+        new_behavior: new_behavior {
+            compatible = "zmk,behavior-hold-tap";
+            label = "NEW_BEHAVIOR";
+            bindings = <&kp>, <&reg_backtick>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        tick_holdkey: tick_holdkey {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TICK_HOLDKEY";
+            bindings = <&kp>, <&reg_backtick>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        period_hold: period_hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "PERIOD_HOLD";
+            bindings = <&mo>, <&reg_period>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
     };
 
     macros {
@@ -142,6 +169,48 @@
             bindings = <&kp ESCAPE &kp LS(EQUAL) &kp LS(EQUAL) &kp LS(D)>;
             label = "JMP_TO_D";
         };
+
+        reg_backtick: reg_backtick {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE &kp GRAVE>;
+            label = "REG_BACKTICK";
+        };
+
+        reg_period: reg_colon {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE &kp PERIOD>;
+            label = "REG_COLON";
+        };
+
+        fast_letf: fast_letf {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp N5 &kp LEFT_ARROW>;
+            label = "FAST_LETF";
+        };
+
+        fast_right: fast_right {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp N5 &kp RIGHT>;
+            label = "FAST_RIGHT";
+        };
+
+        fast_up: fast_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp N5 &kp UP_ARROW>;
+            label = "FAST_UP";
+        };
+
+        fast_dwn: fast_dwn {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp N5 &kp DOWN_ARROW>;
+            label = "FAST_DWN";
+        };
     };
 
     keymap {
@@ -150,27 +219,27 @@
         default {
             display-name = "Default";
             bindings = <
-&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &mklh 3 MB4  &trans  &lh 2 SPACE  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &mt LEFT_SHIFT ESCAPE  &mkh LEFT_ALT MB5  &trans  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
+&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &a_morph  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp SLASH  &kp W  &kp MINUS  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &period_hold 3 0  &trans  &lh 2 SPACE  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &mt LEFT_SHIFT ESCAPE  &tick_holdkey LEFT_ALT 0  &kp LEFT_GUI  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
             >;
         };
 
         num_sepcial {
             display-name = "num-special";
             bindings = <
-&kp N0  &kp RA(RIGHT_BRACKET)  &kp N7  &kp N8  &kp N9  &kp LA(RIGHT_BRACKET)  &trans  &kp NUBS  &kp LS(N8)  &kp LS(N9)  &trans  &kp LS(RIGHT_BRACKET)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &trans  &kp LS(NUBS)  &kp RA(LEFT_BRACE)  &kp RA(N0)  &kp BACKSLASH  &kp RA(NUBS)  &trans  &kp RIGHT_BRACKET  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &apostroph  &kp RA(N8)  &kp RA(N9)  &kp LS(N5)  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &trans  &areg  &breg  &creg  &dreg
+&trans  &kp RA(RIGHT_BRACKET)  &kp N7  &kp N8  &kp N9  &kp LA(RIGHT_BRACKET)  &trans  &kp NUBS  &kp LS(N8)  &kp LS(N9)  &kp RA(E)  &kp LS(RIGHT_BRACKET)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &kp LS(SLASH)  &kp LS(NUBS)  &kp RA(LEFT_BRACE)  &kp RA(N0)  &kp BACKSLASH  &kp RA(NUBS)  &kp RA(Q)  &kp RIGHT_BRACKET  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &apostroph  &kp RA(N8)  &kp RA(N9)  &kp LS(N5)  &trans  &trans  &kp N0  &kp LS(SLASH)  &kp LS(NUMBER_6)  &trans  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &trans  &fast_up  &trans  &fast_letf  &trans  &fast_right  &trans  &trans  &trans  &fast_dwn  &trans  &trans  &trans  &trans  &kp LC(M)  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &kp LC(P)  &areg  &breg  &creg  &dreg
             >;
         };
 
         navigation {
             display-name = "navigation";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &trans  &trans  &mmv MOVE_DOWN  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp BACKSPACE  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &trans  &trans  &mmv MOVE_DOWN  &trans  &mkp MB1  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB2  &kp LC(O)  &trans  &kp DEL  &trans  &trans  &trans  &trans
             >;
         };
 
         fun {
             bindings = <
-&trans  &trans  &trans  &trans  &kp F3  &kp F4  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &kp F2  &kp F5  &kp F8  &kp F11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F6  &kp F7  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &kp F3  &kp F4  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &kp F2  &kp F5  &kp F8  &kp F11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F6  &kp F7  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp BACKSPACE  &trans  &trans  &trans  &trans
             >;
         };
 
