@@ -103,6 +103,8 @@
         apostroph: apostroph {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp LS(EQUAL) &kp LS(EQUAL)>;
             label = "APOSTROPH";
         };
@@ -110,6 +112,8 @@
         hat: hat {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp GRAVE &kp GRAVE>;
             label = "HAT";
         };
@@ -173,14 +177,18 @@
         reg_backtick: reg_backtick {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LS(EQUAL) &kp LS(EQUAL)>;
+            wait-ms = <1>;
+            tap-ms = <1>;
+            bindings = <&kp LS(EQUAL) &kp LS(EQUAL) &kp LS(EQUAL) &kp LS(EQUAL)>;
             label = "REG_BACKTICK";
         };
 
         reg_period: reg_colon {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LS(EQUAL) &kp PERIOD>;
+            wait-ms = <1>;
+            tap-ms = <1>;
+            bindings = <&kp LS(EQUAL) &kp LS(EQUAL) &kp PERIOD>;
             label = "REG_COLON";
         };
 
@@ -276,6 +284,11 @@
             bindings = <&kp RIGHT_ALT>;
             key-positions = <61 53>;
         };
+
+        delete_behavior {
+            bindings = <&kp DEL>;
+            key-positions = <63 55>;
+        };
     };
 
     keymap {
@@ -291,14 +304,14 @@
         num_sepcial {
             display-name = "num-special";
             bindings = <
-&trans  &kp RA(RIGHT_BRACKET)  &kp N7  &kp N8  &kp N9  &kp LA(RIGHT_BRACKET)  &trans  &kp LS(NUMBER_2)  &kp LS(N8)  &kp LS(N9)  &kp RA(E)  &kp LS(RIGHT_BRACKET)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp LS(MINUS)  &kp LS(SLASH)  &kp LS(BACKSLASH)  &kp RA(LEFT_BRACE)  &kp RA(N0)  &kp BACKSLASH  &kp RA(NUBS)  &kp RA(Q)  &kp RIGHT_BRACKET  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_1)  &trans  &apostroph  &kp RA(N8)  &kp RA(N9)  &kp LS(N5)  &trans  &trans  &kp N0  &kp LS(SLASH)  &kp LS(NUMBER_6)  &trans  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &trans  &fast_up  &trans  &fast_letf  &trans  &fast_right  &trans  &trans  &trans  &fast_dwn  &trans  &trans  &trans  &trans  &kp LC(M)  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &trans  &kp LC(P)  &reg_A_ins  &reg_b_ins  &reg_c_ins  &reg_d_ins
+&trans  &kp RA(RIGHT_BRACKET)  &trans  &trans  &kp LS(NUMBER_2)  &trans  &trans  &kp N7  &kp N8  &kp N9  &trans  &kp LS(RIGHT_BRACKET)  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &kp LS(BACKSLASH)  &kp LS(MINUS)  &kp LS(SLASH)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp BACKSLASH  &kp RA(NUBS)  &kp RA(Q)  &kp RIGHT_BRACKET  &trans  &trans  &apostroph  &kp LS(NUMBER_1)  &kp N0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(N5)  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &trans  &trans  &trans  &fast_up  &trans  &fast_letf  &trans  &fast_right  &trans  &trans  &trans  &fast_dwn  &trans  &trans  &trans  &kp LC(N)  &trans  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &kp LC(P)  &trans  &reg_A_ins  &reg_b_ins  &reg_c_ins  &reg_d_ins
             >;
         };
 
         navigation {
             display-name = "navigation";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &trans  &trans  &mmv MOVE_DOWN  &trans  &mkp MB1  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB2  &kp LC(O)  &trans  &kp DEL  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp NUMBER_1  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &trans  &trans  &mmv MOVE_DOWN  &trans  &mkp MB1  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB2  &kp LC(O)  &trans  &kp DEL  &trans  &trans  &trans  &trans
             >;
         };
 
