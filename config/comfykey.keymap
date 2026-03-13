@@ -173,14 +173,14 @@
         reg_backtick: reg_backtick {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp GRAVE &kp GRAVE>;
+            bindings = <&kp LS(EQUAL) &kp LS(EQUAL)>;
             label = "REG_BACKTICK";
         };
 
         reg_period: reg_colon {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp GRAVE &kp PERIOD>;
+            bindings = <&kp LS(EQUAL) &kp PERIOD>;
             label = "REG_COLON";
         };
 
@@ -266,6 +266,15 @@
             #binding-cells = <0>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp D &kp P>;
             label = "REG_D_YAN";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        Lgui_combo {
+            bindings = <&kp RIGHT_ALT>;
+            key-positions = <61 53>;
         };
     };
 
