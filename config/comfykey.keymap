@@ -131,28 +131,28 @@
         areg: a_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp A>;
+            bindings = <&kp ESCAPE &kp A &kp LC(R) &kp A>;
             label = "A_REG";
         };
 
         breg: b_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp B>;
+            bindings = <&kp ESCAPE &kp A &kp LC(R) &kp B>;
             label = "B_REG";
         };
 
         creg: c_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp C>;
+            bindings = <&kp ESCAPE &kp A &kp LC(R) &kp C>;
             label = "C_REG";
         };
 
         dreg: d_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp I &kp LC(R) &kp D>;
+            bindings = <&kp ESCAPE &kp A &kp LC(R) &kp D>;
             label = "D_REG";
         };
 
@@ -261,28 +261,28 @@
         reg_a_yank: reg_a_yank {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp A &kp P>;
+            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp A &kp Y>;
             label = "REG_A_YANK";
         };
 
         reg_b_yank: reg_b_yank {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp B &kp P>;
+            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp B &kp Y>;
             label = "REG_A_YANK";
         };
 
         reg_c_yan: reg_c_yan {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp C &kp P>;
+            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp C &kp Y>;
             label = "REG_C_YAN";
         };
 
         reg_d_yan: reg_d_yan {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp D &kp P>;
+            bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp D &kp Y>;
             label = "REG_D_YAN";
         };
 
@@ -316,7 +316,7 @@
         delete_behavior {
             bindings = <&kp DEL>;
             key-positions = <63 55>;
-            require-prior-idle-ms = <500>;
+            require-prior-idle-ms = <250>;
         };
 
         gui {
@@ -352,7 +352,7 @@
 
         fun {
             bindings = <
-&trans  &trans  &trans  &trans  &kp F3  &kp F4  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &kp F2  &kp F5  &kp F8  &kp F11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F6  &kp F7  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp BACKSPACE  &reg_a_yank  &reg_b_yank  &reg_c_yan  &reg_d_yan
+&trans  &trans  &trans  &trans  &kp F3  &kp F4  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &kp F2  &kp F5  &kp F8  &kp F11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F6  &kp F7  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_MUTE  &trans  &kp C_VOL_UP  &trans  &trans  &trans  &kp C_PREV  &kp C_PP  &kp C_NEXT  &trans  &kp C_VOL_DN  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp BACKSPACE  &reg_a_yank  &reg_b_yank  &reg_c_yan  &reg_d_yan
             >;
         };
 
