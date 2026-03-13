@@ -131,6 +131,8 @@
         areg: a_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp A &kp LC(R) &kp A>;
             label = "A_REG";
         };
@@ -138,6 +140,8 @@
         breg: b_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp A &kp LC(R) &kp B>;
             label = "B_REG";
         };
@@ -145,6 +149,8 @@
         creg: c_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp A &kp LC(R) &kp C>;
             label = "C_REG";
         };
@@ -152,6 +158,8 @@
         dreg: d_reg {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp A &kp LC(R) &kp D>;
             label = "D_REG";
         };
@@ -159,6 +167,8 @@
         jmp_to_A: jmp_to_A {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(EQUAL) &kp LS(EQUAL) &kp LS(A)>;
             label = "JMP_TO_A";
         };
@@ -166,6 +176,8 @@
         jmp_to_B: jmp_to_B {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(EQUAL) &kp LS(EQUAL) &kp LS(B)>;
             label = "JMP_TO_B";
         };
@@ -173,6 +185,8 @@
         jmp_to_C: jmp_to_C {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(EQUAL) &kp LS(EQUAL) &kp LS(C)>;
             label = "JMP_TO_C";
         };
@@ -180,6 +194,8 @@
         jmp_to_D: jmp_to_D {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(EQUAL) &kp LS(EQUAL) &kp LS(D)>;
             label = "JMP_TO_D";
         };
@@ -205,6 +221,8 @@
         fast_letf: fast_letf {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp N5 &kp N0 &kp LEFT_ARROW>;
             label = "FAST_LETF";
         };
@@ -212,6 +230,8 @@
         fast_right: fast_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp N5 &kp N0 &kp RIGHT>;
             label = "FAST_RIGHT";
         };
@@ -219,6 +239,8 @@
         fast_up: fast_up {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp N5 &kp N0 &kp UP_ARROW>;
             label = "FAST_UP";
         };
@@ -226,6 +248,8 @@
         fast_dwn: fast_dwn {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp N5 &kp N0 &kp DOWN_ARROW>;
             label = "FAST_DWN";
         };
@@ -233,6 +257,8 @@
         reg_A_ins: reg_A_ins {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp A &kp P>;
             label = "REG_A_INS";
         };
@@ -240,6 +266,8 @@
         reg_b_ins: reg_b_ins {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp B &kp P>;
             label = "REG_B_INS";
         };
@@ -247,6 +275,8 @@
         reg_c_ins: reg_c_inster {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp C &kp P>;
             label = "REG_C_INSTER";
         };
@@ -254,6 +284,8 @@
         reg_d_ins: reg_d_ins {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp D &kp P>;
             label = "REG_D_INS";
         };
@@ -261,6 +293,8 @@
         reg_a_yank: reg_a_yank {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp A &kp Y>;
             label = "REG_A_YANK";
         };
@@ -268,6 +302,8 @@
         reg_b_yank: reg_b_yank {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp B &kp Y>;
             label = "REG_A_YANK";
         };
@@ -275,6 +311,8 @@
         reg_c_yan: reg_c_yan {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp C &kp Y>;
             label = "REG_C_YAN";
         };
@@ -282,6 +320,8 @@
         reg_d_yan: reg_d_yan {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
             bindings = <&kp ESCAPE &kp LS(NUMBER_2) &kp D &kp Y>;
             label = "REG_D_YAN";
         };
