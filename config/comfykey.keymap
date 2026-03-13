@@ -311,7 +311,7 @@
 
         gui {
             bindings = <&kp LEFT_GUI>;
-            key-positions = <62 54>
+            key-positions = <62 54>;
             require-prior-idle-ms = <150>;
         };
     };
