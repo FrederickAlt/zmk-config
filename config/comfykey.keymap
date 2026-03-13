@@ -284,6 +284,15 @@
             bindings = <&kp G &kp COMMA>;
             label = "NXTCHG";
         };
+
+        reg_0: reg_0 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <1>;
+            tap-ms = <1>;
+            bindings = <&kp LS(EQUAL) &kp LS(EQUAL) &kp N0>;
+            label = "REG_0";
+        };
     };
 
     combos {
@@ -311,7 +320,7 @@
         default {
             display-name = "Default";
             bindings = <
-&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &kp W  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp MINUS  &a_morph  &kp SLASH  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &nxtchg_hold 3 0  &trans  &lh 2 SPACE  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &mt LEFT_SHIFT ESCAPE  &lstchg_holdkey LEFT_ALT 0  &reg_backtick  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
+&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &kp W  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp MINUS  &a_morph  &kp SLASH  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &nxtchg_hold 3 0  &reg_0  &lh 2 SPACE  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &mt LEFT_SHIFT ESCAPE  &lstchg_holdkey LEFT_ALT 0  &reg_backtick  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
             >;
         };
 
