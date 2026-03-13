@@ -97,6 +97,16 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
+
+        lh_prior_idle: lh_prior_idle {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LH_PRIOR_IDLE";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            require-prior-idle-ms = <200>;
+        };
     };
 
     macros {
@@ -303,6 +313,12 @@
             key-positions = <61 53>;
         };
 
+        delete_behavior {
+            bindings = <&kp DEL>;
+            key-positions = <63 55>;
+            require-prior-idle-ms = <500>;
+        };
+
         gui {
             bindings = <&kp LEFT_GUI>;
             key-positions = <62 54>;
@@ -316,7 +332,7 @@
         default {
             display-name = "Default";
             bindings = <
-&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &kp W  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp MINUS  &a_morph  &kp SLASH  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &nxtchg_hold 3 0  &reg_0  &lh 2 SPACE  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &mt LEFT_SHIFT ESCAPE  &lstchg_holdkey LEFT_ALT 0  &reg_backtick  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
+&kp LS(NUMBER_4)  &kp TAB  &kp E  &kp R  &kp F  &kp LS(N7)  &kp J  &kp Z  &o_morph  &u_morph  &kp Y  &kp W  &kp S  &kp D  &kp T  &kp PERIOD  &kp M  &kp N  &kp G  &kp H  &kp I  &kp P  &kp MINUS  &a_morph  &kp SLASH  &kp C  &kp L  &kp COMMA  &kp V  &kp B  &kp Q  &kp X  &kp K  &kp LS(N0)  &hat  &kp LS(NUMBER_8)  &kp LS(NUMBER_9)  &kp RA(MINUS)  &kp RA(N7)  &kp RA(N8)  &kp RA(N9)  &kp RA(N0)  &kp UP  &kp PG_UP  &kp LEFT  &kp LEFT_GUI  &kp RIGHT  &kp HOME  &kp ESCAPE  &kp END  &kp DOWN  &kp PG_DN  &lh 1 ENTER  &nxtchg_hold 3 0  &reg_0  &lh_prior_idle 2 SPACE  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &mt LEFT_SHIFT ESCAPE  &lstchg_holdkey LEFT_ALT 0  &reg_backtick  &kh LCTRL BACKSPACE  &areg  &breg  &creg  &dreg
             >;
         };
 
@@ -330,7 +346,7 @@
         navigation {
             display-name = "navigation";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp NUMBER_1  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &trans  &trans  &mmv MOVE_DOWN  &trans  &mkp MB1  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB2  &kp LC(O)  &trans  &kp DEL  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mmv MOVE_UP  &trans  &mmv MOVE_LEFT  &mkp LCLK  &mmv MOVE_RIGHT  &trans  &trans  &trans  &mmv MOVE_DOWN  &trans  &mkp MB1  &kp LC(I)  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB2  &kp LC(O)  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
