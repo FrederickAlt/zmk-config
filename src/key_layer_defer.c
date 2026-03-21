@@ -306,3 +306,5 @@ static int key_layer_defer_listener(const zmk_event_t *ev) {
 
 ZMK_LISTENER(key_layer_defer, key_layer_defer_listener);
 ZMK_SUBSCRIPTION(key_layer_defer, zmk_position_state_changed);
+
+#endif /* IS_ENABLED(CONFIG_ZMK_KEY_LAYER_DEFER) */
