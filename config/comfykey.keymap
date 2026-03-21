@@ -362,11 +362,11 @@
             key-positions = <61 53>;
         };
 
-        /*delete_behavior {
+        delete_behavior {
             bindings = <&kp DEL>;
             key-positions = <63 55>;
             require-prior-idle-ms = <250>;
-        };*/
+        };
 
         gui {
             bindings = <&kp LEFT_GUI>;
