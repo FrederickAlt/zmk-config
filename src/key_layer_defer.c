@@ -284,7 +284,29 @@ static int key_layer_defer_init(void) {
           DEFER_SLOTS);
   return 0;
 }
-SYS_INIT(key_layer_defer_init, POST_KERNEL,
-         CONFIG_KERNEL_INIT_PRIORITY_DEFAULT);
+static bool initialized = false;
 
+static void key_layer_defer_init(void) {
+#if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
+  DT_INST_FOREACH_CHILD(0, MARK_COMBO_KEYS)
+#endif
+  for (int i = 0; i < DEFER_SLOTS; i++) {
+    slots[i].active = false;
+    k_work_init_delayable(&slots[i].timer, defer_timeout);
+  }
+  LOG_INF("key_layer_defer: ready, window=%dms slots=%d", LAYER_DEFER_MS,
+          DEFER_SLOTS);
+}
+
+static int key_layer_defer_listener(const zmk_event_t *ev) {
+  if (!initialized) {
+    key_layer_defer_init();
+    initialized = true;
+  }
+  struct zmk_position_state_changed *data = as_zmk_position_state_changed(ev);
+  if (!data) {
+    return ZMK_EV_EVENT_BUBBLE;
+  }
+  return data->state ? on_press(ev, data) : on_release(ev, data);
+}
 #endif /* IS_ENABLED(CONFIG_ZMK_KEY_LAYER_DEFER) */
