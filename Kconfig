@@ -1,13 +1,35 @@
 config ZMK_KEY_LAYER_DEFER
-    bool "Defer non-combo key dispatch for layer detection"
+    bool "Defer regular key dispatch for layer detection"
     default n
+    help
+      Captures every position-press that is not a configured modifier key
+      and delays forwarding it for up to ZMK_KEY_LAYER_DEFER_MS.  This
+      gives &mo and hold-tap layer activations time to register before the
+      key binding is resolved against the layer stack.
+
+      Only one regular key is held at a time.  A second regular key
+      flushes the first.  A modifier key also flushes the held key first,
+      then passes through immediately.
+
+      IMPORTANT: All combo timeout-ms values must be strictly greater than
+      ZMK_KEY_LAYER_DEFER_MS, because this module delays events before
+      combo.c sees them, consuming part of the combo's timing window.
+
+if ZMK_KEY_LAYER_DEFER
 
 config ZMK_KEY_LAYER_DEFER_MS
     int "Layer detection window (ms)"
     default 50
-    depends on ZMK_KEY_LAYER_DEFER
+    help
+      How long to hold a regular key press before forwarding it.
 
-config ZMK_KEY_LAYER_DEFER_SLOTS
-    int "Maximum concurrently deferred keys"
-    default 8
-    depends on ZMK_KEY_LAYER_DEFER
+config ZMK_KEY_LAYER_DEFER_MOD_POSITIONS
+    string "Space-separated key positions treated as modifier/layer keys"
+    default ""
+    help
+      Physical key position numbers that pass through immediately without
+      deferral.  Include all keys bound to &mo, &lt, &mt, &sk, etc.
+      These are the same position indices used in combo key-positions.
+      Example: "30 31 32 33 34 35"
+
+endif # ZMK_KEY_LAYER_DEFER
