@@ -357,7 +357,7 @@
     combos {
         compatible = "zmk,combos";
 
-        Lgui_combo {
+        ralt_combo {
             bindings = <&kp RIGHT_ALT>;
             key-positions = <61 53>;
         };
@@ -366,12 +366,14 @@
             bindings = <&kp DEL>;
             key-positions = <63 55>;
             require-prior-idle-ms = <250>;
+            timeout-ms = <100>;
         };
 
         gui {
             bindings = <&kp LEFT_GUI>;
             key-positions = <62 54>;
             require-prior-idle-ms = <500>;
+            timeout-ms = <100>;
         };
     };
 
