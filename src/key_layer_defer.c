@@ -284,6 +284,7 @@ static int key_layer_defer_init(void) {
           DEFER_SLOTS);
   return 0;
 }
-SYS_INIT(key_layer_defer_init, APPLICATION, 90);
+SYS_INIT(key_layer_defer_init, POST_KERNEL,
+         CONFIG_KERNEL_INIT_PRIORITY_DEFAULT);
 
 #endif /* IS_ENABLED(CONFIG_ZMK_KEY_LAYER_DEFER) */
