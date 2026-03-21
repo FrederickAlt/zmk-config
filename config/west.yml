@@ -8,11 +8,16 @@ manifest:
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
     - name: englmaxi
       url-base: https://github.com/englmaxi
+    - name: FrederickAlt
+      url-base: https://github.com/FrederickAlt
   projects:
     - name: zmk
       remote: zmkfirmware
       import: app/west.yml
     - name: zmk-dongle-display
       remote: englmaxi
+    - name: zmk-layer-defer
+      remote: FrederickAlt
+      revision: main
   self:
     path: config
