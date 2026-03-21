@@ -107,6 +107,15 @@
             tapping-term-ms = <200>;
             require-prior-idle-ms = <200>;
         };
+
+        delete_morph: delete_morph {
+            compatible = "zmk,behavior-mod-morph";
+            label = "DELETE_MORPH";
+            bindings = <&kp SPACE>, <&kp DELETE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LCTL)>;
+        };
     };
 
     macros {
@@ -348,7 +357,7 @@
     combos {
         compatible = "zmk,combos";
 
-        Lgui_combo {
+        ralt_combo {
             bindings = <&kp RIGHT_ALT>;
             key-positions = <61 53>;
         };
@@ -357,12 +366,14 @@
             bindings = <&kp DEL>;
             key-positions = <63 55>;
             require-prior-idle-ms = <250>;
+            timeout-ms = <100>;
         };
 
         gui {
             bindings = <&kp LEFT_GUI>;
             key-positions = <62 54>;
             require-prior-idle-ms = <500>;
+            timeout-ms = <100>;
         };
     };
 
@@ -392,7 +403,7 @@
 
         fun {
             bindings = <
-&trans  &trans  &trans  &trans  &kp F3  &kp F4  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &kp F2  &kp F5  &kp F8  &kp F11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F6  &kp F7  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_MUTE  &trans  &kp C_VOL_UP  &trans  &trans  &trans  &kp C_PREV  &kp C_PP  &kp C_NEXT  &trans  &kp C_VOL_DN  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp BACKSPACE  &reg_a_yank  &reg_b_yank  &reg_c_yan  &reg_d_yan
+&trans  &trans  &trans  &trans  &kp F3  &kp F4  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &kp F2  &kp F5  &kp F8  &kp F11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F6  &kp F7  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_MUTE  &trans  &kp C_VOL_UP  &trans  &trans  &trans  &kp C_PREV  &kp C_PP  &kp C_NEXT  &trans  &kp C_VOL_DN  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp RIGHT_ALT  &trans  &kp BACKSPACE  &reg_a_yank  &reg_b_yank  &reg_c_yan  &reg_d_yan
             >;
         };
 
