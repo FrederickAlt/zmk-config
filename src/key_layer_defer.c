@@ -4,19 +4,44 @@
  *
  * key_layer_defer.c
  *
- * Captures every position-press event and holds it for
- * CONFIG_ZMK_KEY_LAYER_DEFER_MS before releasing it onward to the rest
- * of the event chain (combo subsystem, then zmk_keymap).
+ * Captures non-modifier key presses and holds the most recent one for up
+ * to CONFIG_ZMK_KEY_LAYER_DEFER_MS, giving &mo / hold-tap layer keys time
+ * to activate before the held key's binding is resolved.
  *
- * This gives &mo / hold-tap layer activations time to take effect before
- * the key binding is resolved against the layer stack.
+ * "Modifier keys" are specific physical key positions declared in
+ * CONFIG_ZMK_KEY_LAYER_DEFER_MOD_POSITIONS (space-separated list of
+ * position numbers, e.g. "30 31 32 33").  All other positions are
+ * "regular keys" subject to deferral.
  *
- * Because this is an external ZMK module it is linked before ZMK
- * internals, so our listener runs first in the event chain.
+ * Press rules
+ * -----------
+ *  Regular key, nothing held:
+ *      Capture it, start timer.
  *
- * ZMK_EVENT_RELEASE() continues processing from the next listener after
- * us, so the event passes through combo (which may or may not match it)
- * and then reaches zmk_keymap which resolves it on the current layer.
+ *  Regular key, one already held:
+ *      Fire the held press, clear the buffer, capture the new key.
+ *
+ *  Modifier key, one regular key held:
+ *      Fire the held press first (it was physically pressed earlier),
+ *      clear the buffer, then bubble the modifier through.
+ *
+ *  Modifier key, nothing held:
+ *      Bubble immediately — modifiers are never deferred.
+ *
+ * Release rules
+ * -------------
+ *  Regular key, still in buffer (timer has not fired):
+ *      Fire the press, bubble the release, clear the buffer.
+ *
+ *  Any other release (modifier, or regular whose timer already fired):
+ *      Bubble immediately — nothing to do.
+ *
+ * Combo interaction
+ * -----------------
+ * We delay ALL regular key events before combo.c sees them.  combo.c
+ * computes its timeout from the original physical-press timestamp, so
+ * our deferral consumes part of the combo window.  Keep all combo
+ * timeout-ms strictly greater than CONFIG_ZMK_KEY_LAYER_DEFER_MS.
  */
 
 #include <zephyr/kernel.h>
@@ -35,81 +60,120 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
  * ========================================================================= */
 
 #define LAYER_DEFER_MS CONFIG_ZMK_KEY_LAYER_DEFER_MS
-#define DEFER_SLOTS CONFIG_ZMK_KEY_LAYER_DEFER_SLOTS
+#define MAX_MOD_POSITIONS 32
 
 /* =========================================================================
- * Deferred key slots
+ * Modifier-position table
+ *
+ * Populated at init by parsing CONFIG_ZMK_KEY_LAYER_DEFER_MOD_POSITIONS,
+ * a space-separated string of decimal key-position numbers.
  * ========================================================================= */
 
-struct defer_slot {
+static uint32_t mod_positions[MAX_MOD_POSITIONS];
+static int mod_positions_count = 0;
+
+static void parse_mod_positions(void) {
+  const char *s = CONFIG_ZMK_KEY_LAYER_DEFER_MOD_POSITIONS;
+  mod_positions_count = 0;
+
+  while (*s != '\0' && mod_positions_count < MAX_MOD_POSITIONS) {
+    while (*s == ' ' || *s == '\t') {
+      s++;
+    }
+    if (*s == '\0') {
+      break;
+    }
+
+    uint32_t val = 0;
+    bool got_digit = false;
+    while (*s >= '0' && *s <= '9') {
+      val = val * 10 + (uint32_t)(*s - '0');
+      got_digit = true;
+      s++;
+    }
+    if (got_digit) {
+      mod_positions[mod_positions_count++] = val;
+    } else {
+      s++; /* skip unexpected character */
+    }
+  }
+
+  LOG_INF("layer_defer: %d modifier position(s) configured",
+          mod_positions_count);
+}
+
+static bool is_modifier_position(uint32_t pos) {
+  for (int i = 0; i < mod_positions_count; i++) {
+    if (mod_positions[i] == pos) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/* =========================================================================
+ * Single held-key buffer
+ * ========================================================================= */
+
+struct held_key {
   bool active;
-  bool press_fired;
   uint32_t position;
   struct zmk_position_state_changed_event ev;
   struct k_work_delayable timer;
 };
 
-static struct defer_slot slots[DEFER_SLOTS];
-static bool initialized = false;
-
-static struct defer_slot *find_active(uint32_t pos) {
-  for (int i = 0; i < DEFER_SLOTS; i++) {
-    if (slots[i].active && slots[i].position == pos) {
-      return &slots[i];
-    }
-  }
-  return NULL;
-}
-
-static struct defer_slot *alloc_slot(void) {
-  for (int i = 0; i < DEFER_SLOTS; i++) {
-    if (!slots[i].active) {
-      return &slots[i];
-    }
-  }
-  return NULL;
-}
+static struct held_key held;
 
 /* =========================================================================
- * Firing a deferred press
+ * Forward declaration
  * ========================================================================= */
 
-static void fire_press(struct defer_slot *slot) {
-  if (slot->press_fired) {
-    return;
-  }
-  slot->press_fired = true;
-  k_work_cancel_delayable(&slot->timer);
-  LOG_DBG("layer_defer: firing press pos=%u", slot->position);
-  ZMK_EVENT_RELEASE(slot->ev);
-}
-
-/* =========================================================================
- * Timer callback
- * ========================================================================= */
-
-static void defer_timeout(struct k_work *work) {
-  struct defer_slot *slot =
-      CONTAINER_OF(CONTAINER_OF(work, struct k_work_delayable, work),
-                   struct defer_slot, timer);
-  if (!slot->active || slot->press_fired) {
-    return;
-  }
-  LOG_DBG("layer_defer: timer expired pos=%u", slot->position);
-  fire_press(slot);
-}
+static void defer_timeout(struct k_work *work);
 
 /* =========================================================================
  * Init (lazy, on first event)
  * ========================================================================= */
 
+static bool initialized = false;
+
 static void key_layer_defer_init(void) {
-  for (int i = 0; i < DEFER_SLOTS; i++) {
-    slots[i].active = false;
-    k_work_init_delayable(&slots[i].timer, defer_timeout);
+  parse_mod_positions();
+  held.active = false;
+  k_work_init_delayable(&held.timer, defer_timeout);
+  LOG_INF("layer_defer: ready, window=%dms", LAYER_DEFER_MS);
+}
+
+/* =========================================================================
+ * Core: fire the held press and clear the buffer
+ *
+ * "Fire" means pushing the stored press event copy onward through the
+ * chain via ZMK_EVENT_RELEASE.  This is distinct from "bubble", which
+ * just passes the currently-handled incoming event to the next listener.
+ *
+ * ZMK_EVENT_RELEASE is synchronous — combo and keymap have processed the
+ * press before this function returns.
+ * ========================================================================= */
+
+static void fire_and_clear(void) {
+  if (!held.active) {
+    return;
   }
-  LOG_INF("layer_defer: ready, window=%dms slots=%d", LAYER_DEFER_MS,
-          DEFER_SLOTS);
+  k_work_cancel_delayable(&held.timer);
+  LOG_DBG("layer_defer: firing press pos=%u", held.position);
+  ZMK_EVENT_RELEASE(held.ev);
+  held.active = false;
+}
+
+/* =========================================================================
+ * Timer callback — window expired, send the press and clear
+ * ========================================================================= */
+
+static void defer_timeout(struct k_work *work) {
+  if (!held.active) {
+    return;
+  }
+  LOG_DBG("layer_defer: timer expired pos=%u", held.position);
+  fire_and_clear();
 }
 
 /* =========================================================================
@@ -118,29 +182,46 @@ static void key_layer_defer_init(void) {
 
 static int on_press(const zmk_event_t *ev,
                     struct zmk_position_state_changed *data) {
-  struct defer_slot *slot = alloc_slot();
-  if (!slot) {
-    LOG_WRN("layer_defer: no free slot for pos=%u, bubbling", data->position);
+  if (is_modifier_position(data->position)) {
+    /*
+     * Modifier pressed.  If a regular key is buffered, fire it first
+     * so downstream sees it before the modifier — preserving the
+     * physical press order.  Then bubble the modifier through.
+     */
+    if (held.active) {
+      LOG_DBG("layer_defer: modifier pos=%u arrived, firing held pos=%u first",
+              data->position, held.position);
+      fire_and_clear();
+    }
     return ZMK_EV_EVENT_BUBBLE;
+  }
+
+  /*
+   * Regular key pressed.  If one is already buffered, fire it first.
+   * Then capture the new key.
+   */
+  if (held.active) {
+    LOG_DBG("layer_defer: new regular pos=%u arrived, firing held pos=%u first",
+            data->position, held.position);
+    fire_and_clear();
   }
 
   int64_t age_ms = k_uptime_get() - data->timestamp;
   int64_t remaining = LAYER_DEFER_MS - age_ms;
 
-  slot->active = true;
-  slot->press_fired = false;
-  slot->position = data->position;
-  slot->ev = copy_raised_zmk_position_state_changed(data);
+  held.active = true;
+  held.position = data->position;
+  held.ev = copy_raised_zmk_position_state_changed(data);
 
   if (remaining <= 0) {
+    /* Already older than the window — fire immediately. */
     LOG_DBG("layer_defer: pos=%u already aged %lldms, firing now",
             data->position, age_ms);
-    fire_press(slot);
-    slot->active = false;
+    fire_and_clear();
     return ZMK_EV_EVENT_CAPTURED;
   }
 
-  k_work_schedule(&slot->timer, K_MSEC(remaining));
+  k_work_schedule(&held.timer, K_MSEC(remaining));
   LOG_DBG("layer_defer: captured pos=%u, firing in %lldms", data->position,
           remaining);
   return ZMK_EV_EVENT_CAPTURED;
@@ -148,22 +229,30 @@ static int on_press(const zmk_event_t *ev,
 
 static int on_release(const zmk_event_t *ev,
                       struct zmk_position_state_changed *data) {
-  struct defer_slot *slot = find_active(data->position);
-  if (!slot) {
+  if (held.active && held.position == data->position) {
+    /*
+     * The buffered key was released before its timer fired.
+     * Fire the press first (synchronous), clear the buffer,
+     * then bubble the release so keymap sees press → release
+     * in the correct order.
+     */
+    LOG_DBG("layer_defer: early release pos=%u, firing press first",
+            data->position);
+    fire_and_clear();
     return ZMK_EV_EVENT_BUBBLE;
   }
 
   /*
-   * Key released before timer fired. Deliver press first so zmk_keymap
-   * sees press → release in the correct order. ZMK_EVENT_RELEASE on the
-   * press is processed synchronously before we return, so keymap has
-   * already handled it by the time we bubble the release.
+   * Anything else — modifier release, or release of a regular key
+   * whose press was already sent (timer fired or flushed by a
+   * subsequent key).  Just pass through.
    */
-  fire_press(slot);
-  slot->active = false;
-
   return ZMK_EV_EVENT_BUBBLE;
 }
+
+/* =========================================================================
+ * Listener
+ * ========================================================================= */
 
 static int key_layer_defer_listener(const zmk_event_t *ev) {
   if (!initialized) {
