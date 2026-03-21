@@ -10,33 +10,33 @@
  *
  * "Modifier keys" are specific physical key positions declared in
  * CONFIG_ZMK_KEY_LAYER_DEFER_MOD_POSITIONS (space-separated list of
- * position numbers, e.g. "30 31 32 33").  All other positions are
- * "regular keys" subject to deferral.
+ * position numbers).  All other positions are "regular keys".
  *
  * Press rules
  * -----------
- *  Regular key, nothing held:
+ *  Regular key, no modifier currently held, nothing buffered:
  *      Capture it, start timer for LAYER_DEFER_MS.
  *
- *  Regular key, one already held:
+ *  Regular key, no modifier currently held, one already buffered:
  *      Flush the held key to make room, then capture the new one.
  *
- *  Modifier key, nothing held:
- *      Bubble immediately.
+ *  Regular key, a modifier is currently held:
+ *      Flush any buffered key first (preserve ordering), then bubble
+ *      immediately — the layer is already active, no point deferring.
  *
- *  Modifier key, regular key held:
- *      Reschedule the held key's timer to 1ms, then bubble the modifier.
- *      The modifier enters hold_tap (undecided) immediately.  After 1ms
- *      the held key fires through the chain — hold_tap sees it while
- *      still undecided and can decide hold, activating the layer before
- *      the held key's binding resolves.
+ *  Modifier key press:
+ *      Increment modifier counter, reschedule any buffered key's timer
+ *      to 1ms, then bubble through.
  *
  * Release rules
  * -------------
+ *  Modifier key release:
+ *      Decrement modifier counter, bubble through.
+ *
  *  Regular key still in buffer (timer has not fired):
  *      Fire the press, bubble the release, clear the buffer.
  *
- *  Any other release (modifier, or regular whose timer already fired):
+ *  Any other release (regular whose timer already fired):
  *      Bubble immediately.
  *
  * Combo interaction
@@ -71,6 +71,9 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static uint32_t mod_positions[MAX_MOD_POSITIONS];
 static int mod_positions_count = 0;
+
+/* Number of configured modifier keys currently held down. */
+static int modifiers_down = 0;
 
 static void parse_mod_positions(void) {
   const char *s = CONFIG_ZMK_KEY_LAYER_DEFER_MOD_POSITIONS;
@@ -140,6 +143,7 @@ static bool initialized = false;
 static void key_layer_defer_init(void) {
   parse_mod_positions();
   held.active = false;
+  modifiers_down = 0;
   k_work_init_delayable(&held.timer, defer_timeout);
   LOG_INF("key_layer_defer: ready, window=%dms", LAYER_DEFER_MS);
 }
@@ -185,26 +189,43 @@ static int on_press(const zmk_event_t *ev,
   int64_t remaining = LAYER_DEFER_MS - age_ms;
 
   if (is_modifier_position(data->position)) {
-    LOG_DBG("key_layer_defer: modifier press pos=%u uptime=%lldms "
-            "buffer_active=%d buffer_pos=%u",
-            data->position, uptime, held.active,
+    modifiers_down++;
+    LOG_DBG("key_layer_defer: modifier press pos=%u modifiers_down=%d "
+            "uptime=%lldms buffer_active=%d buffer_pos=%u",
+            data->position, modifiers_down, uptime, held.active,
             held.active ? held.position : 0);
 
     if (held.active) {
       /*
-       * A modifier arrived while a regular key is held.  Reschedule
-       * the timer to fire in 1ms — the modifier is now entering the
-       * chain and hold_tap will start its undecided window.  After
-       * 1ms the held key fires through, hold_tap sees it while still
-       * undecided and resolves hold, activating the layer before the
-       * held key's binding is looked up.
+       * A modifier arrived while a regular key is buffered.
+       * Reschedule to 1ms so the held key fires quickly into the
+       * hold_tap undecided window that is about to open.
        */
-      LOG_DBG("key_layer_defer: modifier arrived, rescheduling held "
-              "pos=%u timer to 1ms",
+      LOG_DBG("key_layer_defer: rescheduling held pos=%u to 1ms",
               held.position);
       k_work_reschedule(&held.timer, K_MSEC(1));
     }
 
+    return ZMK_EV_EVENT_BUBBLE;
+  }
+
+  /* Regular key. */
+
+  if (modifiers_down > 0) {
+    /*
+     * A modifier is already held — layer/modifier is active right now.
+     * Deferring would risk the key firing after the modifier releases.
+     * Flush any buffered key first to preserve ordering, then pass
+     * this key straight through.
+     */
+    LOG_DBG("key_layer_defer: regular press pos=%u with %d modifier(s) "
+            "held, passing through immediately uptime=%lldms",
+            data->position, modifiers_down, uptime);
+    if (held.active) {
+      LOG_DBG("key_layer_defer: flushing held pos=%u before pass-through",
+              held.position);
+      fire_and_clear();
+    }
     return ZMK_EV_EVENT_BUBBLE;
   }
 
@@ -238,6 +259,19 @@ static int on_release(const zmk_event_t *ev,
                       struct zmk_position_state_changed *data) {
   int64_t uptime = k_uptime_get();
 
+  if (is_modifier_position(data->position)) {
+    if (modifiers_down == 0) {
+      LOG_WRN("key_layer_defer: modifier release pos=%u but modifiers_down "
+              "is already 0 — missed a press event uptime=%lldms",
+              data->position, uptime);
+    }
+    modifiers_down--;
+    LOG_DBG("key_layer_defer: modifier release pos=%u modifiers_down=%d "
+            "uptime=%lldms",
+            data->position, modifiers_down, uptime);
+    return ZMK_EV_EVENT_BUBBLE;
+  }
+
   if (held.active && held.position == data->position) {
     LOG_DBG("key_layer_defer: early release pos=%u, firing press first "
             "uptime=%lldms",
@@ -247,8 +281,8 @@ static int on_release(const zmk_event_t *ev,
     return ZMK_EV_EVENT_BUBBLE;
   }
 
-  LOG_DBG("key_layer_defer: release pos=%u not in buffer (already fired "
-          "or modifier), bubbling uptime=%lldms",
+  LOG_DBG("key_layer_defer: release pos=%u not in buffer, bubbling "
+          "uptime=%lldms",
           data->position, uptime);
   return ZMK_EV_EVENT_BUBBLE;
 }
@@ -272,5 +306,3 @@ static int key_layer_defer_listener(const zmk_event_t *ev) {
 
 ZMK_LISTENER(key_layer_defer, key_layer_defer_listener);
 ZMK_SUBSCRIPTION(key_layer_defer, zmk_position_state_changed);
-
-#endif /* IS_ENABLED(CONFIG_ZMK_KEY_LAYER_DEFER) */
