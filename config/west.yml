@@ -16,7 +16,7 @@ manifest:
       import: app/west.yml
     - name: zmk-dongle-display
       remote: englmaxi
-    - name: zmk-simultaneous_modifiers
+    - name: zmk-feature-simultaneous_modifiers
       remote: FrederickAlt
       revision: main
   self:
