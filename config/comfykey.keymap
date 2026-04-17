@@ -5,7 +5,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 &mmv {
-    time-to-max-speed-ms = <800>;
+    time-to-max-speed-ms = <1000>;
     acceleration-exponent = <1>;
 };
 
@@ -400,7 +400,7 @@
         num_sepcial {
             display-name = "num-special";
             bindings = <
-&trans  &kp RA(RIGHT_BRACKET)  &trans  &trans  &kp LS(NUMBER_2)  &trans  &trans  &kp N7  &kp N8  &kp N9  &trans  &kp LS(RIGHT_BRACKET)  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &kp LS(BACKSLASH)  &kp LS(MINUS)  &kp LS(SLASH)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp BACKSLASH  &kp RA(NUBS)  &kp RA(Q)  &kp RIGHT_BRACKET  &trans  &trans  &apostroph  &kp LS(NUMBER_1)  &kp N0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(N5)  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &trans  &trans  &trans  &fast_up  &trans  &fast_letf  &trans  &fast_right  &trans  &trans  &trans  &fast_dwn  &trans  &trans  &trans  &kp LC(N)  &trans  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &kp LC(P)  &trans  &reg_A_ins  &reg_b_ins  &reg_c_ins  &reg_d_ins
+&trans  &kp RA(RIGHT_BRACKET)  &trans  &trans  &kp LS(NUMBER_2)  &trans  &trans  &kp N7  &kp N8  &kp N9  &trans  &kp LS(RIGHT_BRACKET)  &kp NON_US_BSLH  &kp LS(NON_US_BSLH)  &kp LS(BACKSLASH)  &kp LS(MINUS)  &kp LS(SLASH)  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp BACKSLASH  &kp RA(NUBS)  &kp RA(Q)  &kp RIGHT_BRACKET  &trans  &trans  &apostroph  &kp LS(NUMBER_1)  &kp N0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(N5)  &trans  &trans  &trans  &trans  &kp LS(NUMBER_6)  &trans  &trans  &trans  &trans  &fast_up  &msc SCRL_UP  &fast_letf  &trans  &fast_right  &msc SCRL_LEFT  &mkp MCLK  &msc SCRL_RIGHT  &fast_dwn  &msc SCRL_DOWN  &trans  &trans  &kp LC(N)  &trans  &jmp_to_A  &jmp_to_B  &jmp_to_C  &jmp_to_D  &trans  &trans  &kp LC(P)  &trans  &reg_A_ins  &reg_b_ins  &reg_c_ins  &reg_d_ins
             >;
         };
 
