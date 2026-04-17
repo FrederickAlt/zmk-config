@@ -1,5 +1,5 @@
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 2000
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 20 
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 50
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
@@ -8,7 +8,7 @@
 
 &msc {
     acceleration-exponent = <0>;
-    delay-ms = <0>;             
+    delay-ms = <1>;
 };
 
 &mmv {
