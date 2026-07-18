@@ -16,6 +16,10 @@ manifest:
       import: app/west.yml
     - name: zmk-dongle-display
       remote: englmaxi
+    # Load the repress guard before other external event consumers.
+    - name: zmk-feature-repress-guard
+      remote: FrederickAlt
+      revision: main
     - name: zmk-feature-simultaneous_modifiers
       remote: FrederickAlt
       revision: main
